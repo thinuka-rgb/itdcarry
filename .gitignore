@@ -1,6 +1,7 @@
 .env
 .env.local
 .env.txt
+secrets/
 .venv/
 __pycache__/
 .pytest_cache/
@@ -9,3 +10,6 @@ node_modules/
 artifacts/*
 !artifacts/.gitkeep
 work/
+.agents/
+skills-lock.json
+*_getitd/

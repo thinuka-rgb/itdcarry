@@ -1,26 +1,81 @@
 # ITDCarry
 
-ITDCarry is a non-clinical computational proof of concept. It challenges a later
-pipeline with a previously known FLT3-ITD embedded in disclosed synthetic reads
-and records whether that exact marker is recoverable under the tested conditions.
+ITDCarry checks whether a later computational pipeline can recover an exact,
+previously known FLT3 internal tandem duplication from disclosed synthetic
+sequencing reads before a later “not detected” result is treated as technically
+comparable.
 
-It does **not** determine disease status, MRD, remission, relapse, or treatment.
+> Non-clinical proof of concept. ITDCarry does not determine leukemia, MRD,
+> remission, relapse, or treatment. It does not validate specimen collection,
+> extraction, library preparation, sequencing chemistry, or tissue quality.
 
-## Status
+## What runs
 
-The project is being built from the scientific core outward. The initial fixture
-is getITD's attributed upstream test dataset; a custom synthetic fixture must not
-be presented as validated until its manifest and real caller output are frozen.
+1. A deterministic generator produces paired 251-bp synthetic reads containing
+   a 21-bp FLT3-ITD at getITD amplicon position 72.
+2. The same fixture runs through pinned getITD 1.5.17 profiles in Daytona.
+3. Python compares position, length, and sequence exactly.
+4. Neo4j stores case-marker-pipeline-challenge provenance and returns the verdict.
+5. FastAPI serves the API and the single-page demo.
 
-## Verdicts
+Verdicts:
 
-- `COMPUTATIONALLY_OBSERVABLE`: a completed challenge recovered the exact marker.
-- `NOT_TECHNICALLY_COMPARABLE`: a completed challenge did not recover it.
-- `NO_CONCLUSION`: execution, parsing, or provenance computation was incomplete.
+- `COMPUTATIONALLY_OBSERVABLE`: exact synthetic marker recovered.
+- `NOT_TECHNICALLY_COMPARABLE`: execution completed without exact recovery.
+- `NO_CONCLUSION`: execution or provenance computation failed.
 
-## Local checks
+## Verified fixture
+
+- Fixture: `FLT3-ITD-DEMO-001`
+- Sequence: `TTGATTTCAGAGAATATGAAT`
+- Length: 21 bp
+- Position: 72, getITD one-based amplicon coordinate
+- Paired reads: 200 fragments, 251 bp
+- Intended synthetic variant-fragment fraction: 0.60
+- Seed: `20260912`
+- Caller: getITD 1.5.17, commit `d5b80410bdf8dfe00474cd8b51fdf27c5ba0911b`
+
+The compatible profile requires two unique supporting reads and recovers the
+marker. The changed profile requires five; the disclosed fixture has four, so
+the completed caller run does not produce a high-confidence exact call.
+
+## Setup
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e ".[dev]"
 ```
+
+Copy `.env.example` to `.env` and set Daytona values. Neo4j Aura credentials can
+be stored in ignored `secrets/neo4j.env` using Aura's downloaded format.
+
+Generate fixture:
+
+```powershell
+python pipeline/generate_reads.py --reference vendor/getitd/anno/amplicon.txt --output data/synthetic_case/generated
+```
+
+Run tests and app:
+
+```powershell
+python -m pytest
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+```
+
+Open `http://127.0.0.1:8000` and run challenge. One request uses one Daytona
+sandbox for both profiles, avoiding repeated setup.
+
+## Evidence
+
+Each live run creates ignored `artifacts/<run-id>/` folders containing logs,
+raw caller output when present, timestamps, and sandbox identity. API exposes
+hashes and sandbox IDs without exposing service credentials.
+
+## Sources
+
+- [getITD repository](https://github.com/tjblaette/getitd)
+- [getITD publication](https://www.nature.com/articles/s41375-019-0483-z)
+- [Daytona Python SDK](https://github.com/daytona/clients/tree/main/sdk-python)
+- [Neo4j Python driver](https://neo4j.com/docs/python-manual/current/)
 

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITDCarry — Computational Observability</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">ITD<span>Carry</span></a>
+    <div class="badges"><span class="badge amber">Synthetic demo</span><span id="services" class="badge">Checking services</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Computational observability</p>
+        <h1>Can the later pipeline still see the exact marker?</h1>
+        <p class="lede">Challenge a changed analysis pipeline with the known FLT3-ITD in controlled synthetic reads before treating “not detected” as technically comparable.</p>
+      </div>
+      <article class="case-card">
+        <p class="label">Fictional case</p><h2>AML-DEMO-001</h2>
+        <dl><div><dt>Diagnostic marker</dt><dd>FLT3-ITD · 21 bp</dd></div><div><dt>Follow-up</dt><dd class="not-detected">Not detected</dd></div><div><dt>Change</dt><dd>Caller filter profile</dd></div></dl>
+      </article>
+    </section>
+
+    <section class="panel challenge">
+      <div class="flow" aria-label="Observability workflow">
+        <div class="step"><span>01</span><strong>Known marker</strong><small>Position + length + sequence</small></div>
+        <i></i><div class="step"><span>02</span><strong>Synthetic challenge</strong><small>Same fixture, pinned hashes</small></div>
+        <i></i><div class="step"><span>03</span><strong>Changed pipeline</strong><small>Real Daytona execution</small></div>
+      </div>
+      <button id="run" type="button">Run observability challenge <span>→</span></button>
+      <p id="progress" class="progress" aria-live="polite"></p>
+    </section>
+
+    <section id="result" class="result hidden" aria-live="polite">
+      <div id="verdict" class="verdict neutral"><p class="label">Neo4j verdict</p><h2>No conclusion</h2><p>Run challenge to produce verified result.</p></div>
+      <div id="runs" class="runs"></div>
+    </section>
+
+    <section class="panel boundary">
+      <div><p class="eyebrow">Interpretation boundary</p><h2>Software behavior, not patient status.</h2></div>
+      <p>ITDCarry does not determine leukemia, MRD, remission, relapse, or treatment. It does not validate sampling, extraction, library preparation, or sequencing chemistry.</p>
+    </section>
+  </main>
+  <footer>ITDCarry · getITD 1.5.17 · Daytona execution · Neo4j provenance</footer>
+  <script src="/app.js" defer></script>
+</body>
+</html>
+

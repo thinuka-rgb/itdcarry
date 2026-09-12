@@ -1,0 +1,6 @@
+{
+  "profile": "changed",
+  "description": "Requires five unique supporting reads; the disclosed fixture has four.",
+  "changed_condition": "filter_ins_unique_reads=5",
+  "getitd_args": ["-nkern=1", "-filter_ins_unique_reads=5"]
+}

@@ -4,6 +4,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from neo4j import GraphDatabase
+import truststore
 
 from backend.domain import Verdict
 
@@ -41,10 +42,10 @@ MERGE (ch)-[:PRODUCED]->(r)
 """
 
 VERDICT_QUERY = """
-MATCH (c:Case {case_id: $case_id})-[:HAS_FOLLOWUP]->(f:FollowUp)
-MATCH (f)-[:ANALYZED_BY]->(p:Pipeline)
-MATCH (c)-[:HAS_DIAGNOSTIC_ITD]->(i:ITD)
-OPTIONAL MATCH (i)-[:CHALLENGED_IN]->(ch:Challenge)-[:USED_PIPELINE]->(p)
+MATCH (c:Case {case_id: $case_id})-[:HAS_FOLLOWUP]->(f:FollowUp {followup_id: $followup_id})
+MATCH (f)-[:ANALYZED_BY]->(p:Pipeline {pipeline_id: $pipeline_id})
+MATCH (c)-[:HAS_DIAGNOSTIC_ITD]->(i:ITD {variant_id: $variant_id})
+OPTIONAL MATCH (i)-[:CHALLENGED_IN]->(ch:Challenge {challenge_id: $challenge_id})-[:USED_PIPELINE]->(p)
 OPTIONAL MATCH (ch)-[:PRODUCED]->(r:Result)
 WITH [o IN collect({status: ch.status, recovered: r.exact_recovery})
       WHERE o.status IS NOT NULL] AS observations
@@ -62,6 +63,7 @@ END AS verdict
 
 class Neo4jStore:
     def __init__(self, uri: str, username: str, password: str, database: str = "neo4j"):
+        truststore.inject_into_ssl()
         self._driver = GraphDatabase.driver(uri, auth=(username, password))
         self._database = database
 
@@ -82,10 +84,17 @@ class Neo4jStore:
             database_=self._database,
         )
 
-    def get_verdict(self, case_id: str) -> Verdict:
+    def get_verdict(
+        self, case_id: str, followup_id: str, pipeline_id: str, variant_id: str,
+        challenge_id: str,
+    ) -> Verdict:
         records, _, _ = self._driver.execute_query(
             VERDICT_QUERY,
             case_id=case_id,
+            followup_id=followup_id,
+            pipeline_id=pipeline_id,
+            variant_id=variant_id,
+            challenge_id=challenge_id,
             database_=self._database,
         )
         if len(records) != 1:
@@ -94,4 +103,3 @@ class Neo4jStore:
             return Verdict(records[0]["verdict"])
         except (KeyError, ValueError):
             return Verdict.NO_CONCLUSION
-

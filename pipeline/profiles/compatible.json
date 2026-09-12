@@ -1,0 +1,6 @@
+{
+  "profile": "compatible",
+  "description": "Pinned getITD defaults with one execution core.",
+  "getitd_args": ["-nkern=1"]
+}
+

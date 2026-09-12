@@ -1,0 +1,5 @@
+{
+  "profile": "corrected",
+  "description": "Restores getITD's documented two-unique-read requirement.",
+  "getitd_args": ["-nkern=1", "-filter_ins_unique_reads=2"]
+}

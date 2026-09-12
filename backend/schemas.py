@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from backend.domain import Verdict
 
@@ -37,6 +37,14 @@ class RunRecord(BaseModel):
     detected_length_bp: int | None = None
     detected_sequence: str | None = None
     error: str | None = None
+
+    @model_validator(mode="after")
+    def validate_outcome(self) -> "RunRecord":
+        if self.status == "completed" and (self.exact_recovery is None or self.error is not None):
+            raise ValueError("Completed runs require an exact-recovery result and no error")
+        if self.status == "failed" and (self.exact_recovery is not None or not self.error):
+            raise ValueError("Failed runs require an error and no exact-recovery result")
+        return self
 
 
 class HandoffResponse(BaseModel):
