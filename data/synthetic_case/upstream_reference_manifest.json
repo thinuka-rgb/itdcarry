@@ -1,0 +1,32 @@
+{
+  "fixture_id": "GETITD-UPSTREAM-TEST-001",
+  "fixture_class": "attributed_upstream_reference_data",
+  "synthetic": false,
+  "clinical_use": false,
+  "source_repository": "https://github.com/tjblaette/getitd",
+  "source_commit": "d5b80410bdf8dfe00474cd8b51fdf27c5ba0911b",
+  "caller": "getITD",
+  "caller_version": "1.5.17",
+  "paired_end": true,
+  "read_length_bp": 251,
+  "read_count_total": 5000,
+  "r1_sha256": "038ae146f8e684c2688bfc25715bbdf77da52d70c784f2c8074d8eb42423725a",
+  "r2_sha256": "53781c53691d2c51a42d5819fe66da65e11a5481ab2b5468079e625daf476985",
+  "reference_sha256": "87c42cc40d2545a77f4a530bd620f9885ec0adb099041ebe6e324b08502421da",
+  "expected_marker": {
+    "coordinate_system": "getITD_amplicon_start",
+    "position": 72,
+    "length_bp": 21,
+    "sequence": "TTGATTTCAGAGAATATGAAT"
+  },
+  "observed_run": {
+    "vaf_percent": 69.023,
+    "total_supporting_reads": 1377,
+    "unique_supporting_reads": 44
+  },
+  "limitations": [
+    "This is getITD's attributed upstream test fixture, not an ITDCarry-generated fixture.",
+    "It proves caller integration only and must not be described as clinical validation."
+  ]
+}
+

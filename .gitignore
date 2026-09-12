@@ -1,0 +1,11 @@
+.env
+.env.local
+.env.txt
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+node_modules/
+artifacts/*
+!artifacts/.gitkeep
+work/
