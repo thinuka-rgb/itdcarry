@@ -18,6 +18,9 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["httpx>=0.27,<1", "pytest>=8,<10"]
 
+[tool.setuptools.packages.find]
+include = ["backend*", "pipeline*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
