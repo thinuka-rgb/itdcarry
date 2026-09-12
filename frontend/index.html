@@ -30,13 +30,15 @@
         <i></i><div class="step"><span>02</span><strong>Synthetic challenge</strong><small>Same fixture, pinned hashes</small></div>
         <i></i><div class="step"><span>03</span><strong>Changed pipeline</strong><small>Real Daytona execution</small></div>
       </div>
-      <button id="run" type="button">Run observability challenge <span>→</span></button>
+      <button id="run" type="button">Verify technical comparability <span>→</span></button>
       <p id="progress" class="progress" aria-live="polite"></p>
     </section>
 
     <section id="result" class="result hidden" aria-live="polite">
       <div id="verdict" class="verdict neutral"><p class="label">Neo4j verdict</p><h2>No conclusion</h2><p>Run challenge to produce verified result.</p></div>
+      <div id="marker" class="panel hidden"></div>
       <div id="runs" class="runs"></div>
+      <div id="limitations" class="panel hidden"></div>
     </section>
 
     <section class="panel boundary">
@@ -48,4 +50,3 @@
   <script src="/app.js" defer></script>
 </body>
 </html>
-

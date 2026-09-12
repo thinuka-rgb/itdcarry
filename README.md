@@ -1,8 +1,17 @@
 # ITDCarry
 
+[![CI](https://github.com/thinuka-rgb/itdcarry/actions/workflows/ci.yml/badge.svg)](https://github.com/thinuka-rgb/itdcarry/actions/workflows/ci.yml)
+
+![ITDCarry demo interface](docs/demo.png)
+
 ITDCarry checks whether a later computational pipeline can recover an exact,
 previously known FLT3 internal tandem duplication from disclosed synthetic
 sequencing reads before a later “not detected” result is treated as technically
+comparable.
+
+**Judge summary:** ITDCarry is a computational comparability check for molecular
+pathology workflows. It asks whether a changed pipeline can still recover an
+exact known marker before a later “not detected” result is treated as technically
 comparable.
 
 > Non-clinical proof of concept. ITDCarry does not determine leukemia, MRD,
@@ -17,6 +26,11 @@ comparable.
 3. Python compares position, length, and sequence exactly.
 4. Neo4j stores case-marker-pipeline-challenge provenance and returns the verdict.
 5. FastAPI serves the API and the single-page demo.
+
+```text
+Button → FastAPI → Daytona sandbox → getITD → real TSV
+       → exact matcher → Neo4j provenance query → verdict
+```
 
 Verdicts:
 
@@ -38,6 +52,17 @@ Verdicts:
 The compatible profile requires two unique supporting reads and recovers the
 marker. The changed profile requires five; the disclosed fixture has four, so
 the completed caller run does not produce a high-confidence exact call.
+
+This is the central demonstration: the biological input is unchanged while one
+disclosed computational threshold changes the reported result.
+
+## Sponsor responsibilities
+
+| Service | Non-decorative responsibility |
+|---|---|
+| Daytona | Creates the clean Python sandbox, receives the fixture/caller, executes getITD, and returns the real output plus sandbox identity. |
+| Neo4j | Stores case-marker-pipeline-challenge provenance and computes the scoped verdict from graph relationships. |
+| GitHub | Hosts the reproducible source, disclosed fixture, versioned profiles, tests, and CI. |
 
 ## Setup
 

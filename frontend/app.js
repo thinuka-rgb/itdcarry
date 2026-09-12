@@ -3,6 +3,8 @@ const progress=document.querySelector('#progress');
 const result=document.querySelector('#result');
 const verdict=document.querySelector('#verdict');
 const runs=document.querySelector('#runs');
+const marker=document.querySelector('#marker');
+const limitations=document.querySelector('#limitations');
 const safe=s=>String(s??'Unavailable').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 const short=s=>s?s.slice(0,12)+'…':'Unavailable';
 
@@ -22,7 +24,9 @@ function render(data){
   const [tone,title,description]=copy[known];
   verdict.className='verdict '+tone;
   verdict.innerHTML=`<p class="label">Neo4j verdict</p><h2>${title}</h2><p>${description}</p>`;
-  runs.innerHTML=(data.runs||[]).map(r=>`<article class="run-card"><header><h3>${safe(r.profile)}</h3><span class="state">${safe(r.status)}</span></header><dl><div><dt>Exact recovery</dt><dd>${r.exact_recovery===true?'Yes':r.exact_recovery===false?'No':'Unavailable'}</dd></div><div><dt>Sandbox</dt><dd>${safe(short(r.sandbox_id))}</dd></div><div><dt>Caller</dt><dd>${safe(r.caller)} ${safe(r.caller_version)}</dd></div><div><dt>Fixture hash</dt><dd>${safe(short(r.fixture_sha256))}</dd></div><div><dt>Position</dt><dd>${safe(r.detected_position)}</dd></div><div><dt>Length</dt><dd>${r.detected_length_bp==null?'Unavailable':safe(r.detected_length_bp)+' bp'}</dd></div></dl></article>`).join('');
+  if(data.variant){marker.innerHTML=`<p class="label">Known synthetic challenge</p><div><strong>${safe(data.variant.gene)}-${safe(data.variant.type)}</strong><span>Position ${safe(data.variant.position)} · ${safe(data.variant.length_bp)} bp · VAF ${safe(Math.round(data.variant.test_vaf*100))}%</span><code>${safe(data.variant.sequence)}</code></div>`;marker.classList.remove('hidden')}else marker.classList.add('hidden');
+  runs.innerHTML=(data.runs||[]).map(r=>`<article class="run-card"><header><h3>${safe(r.profile)}</h3><span class="state">${safe(r.status)}</span></header><dl><div><dt>Exact recovery</dt><dd>${r.exact_recovery===true?'Yes':r.exact_recovery===false?'No':'Unavailable'}</dd></div><div><dt>Sandbox</dt><dd>${safe(short(r.sandbox_id))}</dd></div><div><dt>Caller</dt><dd>${safe(r.caller)} ${safe(r.caller_version)}</dd></div><div><dt>Configuration</dt><dd>${safe(short(r.config_sha256))}</dd></div><div><dt>Position</dt><dd>${safe(r.detected_position)}</dd></div><div><dt>Length</dt><dd>${r.detected_length_bp==null?'Unavailable':safe(r.detected_length_bp)+' bp'}</dd></div></dl></article>`).join('');
+  if((data.limitations||[]).length){limitations.innerHTML=`<p class="label">Limitations</p><ul>${data.limitations.map(x=>`<li>${safe(x)}</li>`).join('')}</ul>`;limitations.classList.remove('hidden')}else limitations.classList.add('hidden');
   result.classList.remove('hidden');
 }
 
@@ -36,4 +40,3 @@ runButton.addEventListener('click',async()=>{
   }catch(error){render({verdict:'NO_CONCLUSION',runs:[]});progress.textContent=error.name==='AbortError'?'Challenge timed out.':'Execution incomplete: '+error.message;}
   finally{clearTimeout(timer);runButton.disabled=false;}
 });
-
