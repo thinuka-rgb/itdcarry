@@ -66,6 +66,21 @@ python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 Open `http://127.0.0.1:8000` and run challenge. One request uses one Daytona
 sandbox for both profiles, avoiding repeated setup.
 
+## Frontend handoff
+
+The teammate frontend only needs one request:
+
+```http
+POST /api/v1/cases/AML-DEMO-001/handoff-tests
+Content-Type: application/json
+
+{"fixture_id":"FLT3-ITD-DEMO-001","profiles":["compatible","changed"]}
+```
+
+Set `FRONTEND_ORIGIN` to the frontend URL. Display `verdict`, `runs`, and
+`limitations` from the JSON response. Never send Daytona or Neo4j credentials
+to the browser.
+
 ## Evidence
 
 Each live run creates ignored `artifacts/<run-id>/` folders containing logs,
