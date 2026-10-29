@@ -1,0 +1,55 @@
+
+==== PROCESSING SAMPLE pitch-changed ====
+-- Reading FASTQ files --
+Reading FASTQ files took 1.0 s
+Number of total reads: 400
+Number of total reads > 100bp remaining after N-trimming: 400 (100.0 %)
+Mean read length after N-trimming: 251.0
+Number of total reads with mean BQS >= 30: 400 (100.0 %)
+Getting unique reads took 0.0 s
+
+Number of unique reads with mean BQS >= 30: 10
+Number of unique reads with at least 2 copies: 10
+Total reads remaining for analysis: 400 (100.0 %)
+
+-- Aligning to Reference --
+Alignment took 1.85 s
+Filtering 0 / 10 low quality alignments with a score < 40.0 % of max
+Filtering 0 / 10 alignments with indels in primer bases
+Total reads remaining for analysis: 400 (100.0 %)
+Calculating coverage took 0.0 s
+
+-- Looking for insertions & ITDs --
+Collecting inserts took 0.0 s
+4 inserts >= 6 bp were found
+0/4 insertions were part of adapters and filtered
+Filtering inserts for adapter sequences took 0.0 s
+Annotating coverage took 0.0 s
+Collecting ITDs took 0.02 s
+4 ITDs were found
+
+-- Merging insertions --
+1 insertions remain after merging
+1 insertions remain after merging
+1 insertions remain after merging
+1 insertions remain after merging
+
+-- Merging itds --
+1 itds remain after merging
+1 itds remain after merging
+1 itds remain after merging
+1 itds remain after merging
+Merging took 0.05 s
+
+-- Filtering insertions --
+Filtered 1 / 1 insertions based on the number of unique supporting reads
+Filtered 0 / 0 insertions based on the number of total supporting reads
+Filtered 0 / 0 insertions based on the vaf
+0 insertions remain after filtering!
+
+-- Filtering itds --
+Filtered 1 / 1 itds based on the number of unique supporting reads
+Filtered 0 / 0 itds based on the number of total supporting reads
+Filtered 0 / 0 itds based on the vaf
+0 itds remain after filtering!
+Filtering took 0.0 s

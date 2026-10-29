@@ -1,0 +1,28 @@
+{
+  "repository_commit": "789290a1557cae5854cd32b5e2d0b043d7db95e3",
+  "repository_tests": {
+    "passed": 23,
+    "warnings": 1
+  },
+  "presentation_video": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "duration_seconds": 180.0
+  },
+  "demo_video": {
+    "duration_seconds": 40.0
+  },
+  "browser_checks": [
+    "start",
+    "next button",
+    "right-arrow after button focus",
+    "script dialog",
+    "embedded demo duration 40 seconds; readyState 4; playing without media error",
+    "last slide disables next",
+    "fullscreen"
+  ],
+  "browser_test_mode": "localhost HTTP serving only the deliverable folder; embedded data-URL media. Direct file URL test was unavailable in the browser tool.",
+  "offline_design": "HTML embeds every video and poster. No external playback dependencies. External source links optional."
+}

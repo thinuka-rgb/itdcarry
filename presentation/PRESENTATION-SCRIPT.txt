@@ -1,0 +1,72 @@
+ITDCARRY — THREE-MINUTE SPEAKING SCRIPT
+Presenter: Thinuka
+
+Spoken text: 358 words. Target average: 119.3 words per minute.
+Timing is a rehearsal target, not automatic slide advancement.
+Slides: 20 + 30 + 30 + 40 + 35 + 25 = 180 seconds.
+Speak naturally and pause at the demo cues. Do not read the source list aloud.
+
+SLIDE 1 — 0:00–0:20 (20 seconds)
+Same DNA. Different answer?
+[Click to this slide.]
+Hello, I’m Thinuka. Imagine giving two versions of a program the same DNA data and getting different answers. ITDcarry asks a simple question: can changed software still find the exact DNA marker we already know is there? This is a synthetic software experiment.
+
+SLIDE 2 — 0:20–0:50 (30 seconds)
+One threshold. A different result.
+[Click to this slide.]
+Here is the problem in this example. The data has four unique supporting reads—four distinct pieces of supporting sequence evidence. One profile requires two, so it finds the marker. Change that requirement to five, and the same input no longer produces the exact high-confidence result. The DNA has not changed. The software setting has. That makes comparability worth checking.
+
+SLIDE 3 — 0:50–1:20 (30 seconds)
+Challenge it. Then compare exactly.
+[Click to this slide.]
+ITDcarry keeps a precise description of a known DNA pattern called an FLT3-ITD. It creates controlled synthetic reads and challenges the pipeline with them. Then it checks three things: the marker’s position, its length, and its DNA sequence. All three must match. In this example, the target is twenty-one bases long, at position seventy-two in the caller’s reference.
+
+SLIDE 4 — 1:20–2:00 (40 seconds)
+Demo: same input, two runs.
+[Click to this slide.]
+This is a replay of real local results from the repository’s core code. First, we verify the input files and known marker.
+
+The compatible profile finishes successfully. It recovers the exact position, length and sequence, with four unique supporting reads.
+
+Now the changed profile requires five. It also finishes successfully, but does not recover the exact marker.
+
+The local reference result is ‘not technically comparable.’ The setting changed; the marker did not.
+
+DEMO CUES (time since slide 4 starts):
+0–8s: introduce verified local replay and input.
+8–18s: compatible profile.
+18–29s: changed profile.
+29–40s: local reference result; pause to let it land.
+
+SLIDE 5 — 2:00–2:35 (35 seconds)
+A check on software.
+[Click to this slide.]
+The useful result is an explanation we can inspect: this particular software change loses the exact marker in this synthetic challenge. The full repository workflow also uses Daytona for execution and Neo4j for provenance and the verdict; those cloud services were not run in this local demo. This proof of concept does not diagnose disease, determine treatment, or validate the laboratory process. It checks software behavior.
+
+SLIDE 6 — 2:35–3:00 (25 seconds)
+The proposal.
+[Click to this slide.]
+I’m asking for approval to present ITDcarry as a supervised school demonstration, with peer feedback and teacher guidance. A next step would be testing more synthetic cases and documenting where it works and where it fails. The question I want you to remember is: before comparing the answer, have we checked what the software can still see? Thank you.
+
+SOURCES (pinned to the reviewed commit)
+Project scope and workflow
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/README.md
+Synthetic fixture and marker
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/data/synthetic_case/generated/manifest.json
+Compatible profile
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/pipeline/profiles/compatible.json
+Changed threshold
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/pipeline/profiles/changed.json
+Exact matching and local reference verdict
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/backend/exact_match.py
+Caller execution
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/backend/daytona_runner.py
+Neo4j provenance and verdict
+https://github.com/thinuka-rgb/itdcarry/blob/789290a1557cae5854cd32b5e2d0b043d7db95e3/backend/neo4j_store.py
+
+DEMO EVIDENCE
+See evidence/results.json, compatible-raw-output.tsv and both stdout logs.
+Both runs exited with code 0; both FASTQ hashes match the committed manifest.
+The demo uses the actual local caller + parser + exact matcher and local reference verdict.
+It does not claim that the Daytona or Neo4j integrations were executed.
+NO_CONCLUSION is the repository result for execution failure/unknown recovery; no failure is shown in this demonstration.

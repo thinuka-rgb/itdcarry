@@ -119,3 +119,9 @@ hashes and sandbox IDs without exposing service credentials.
 - [Daytona Python SDK](https://github.com/daytona/clients/tree/main/sdk-python)
 - [Neo4j Python driver](https://neo4j.com/docs/python-manual/current/)
 
+
+## School presentation
+
+[Download the presentation package](presentation/ITDcarry-presentation.zip) · [Speaking script](presentation/PRESENTATION-SCRIPT.txt) · [40-second demo](presentation/ITDcarry-demo-40s.mp4)
+
+The package contains a click-controlled offline HTML presentation made with Remotion, a three-minute video backup, and actual local execution evidence. Download and extract the ZIP, then open `OPEN-PRESENTATION.html` in a browser. See [presentation instructions and scope](presentation/README.md).

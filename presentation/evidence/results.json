@@ -1,0 +1,95 @@
+{
+  "mode": "Local core execution; no Daytona or Neo4j execution",
+  "commit": "789290a1557cae5854cd32b5e2d0b043d7db95e3",
+  "executed_at_utc": "2026-10-29T23:03:21.058635+00:00",
+  "marker": {
+    "fixture_id": "FLT3-ITD-DEMO-001",
+    "fixture_class": "deterministic_synthetic_amplicon_reads",
+    "synthetic": true,
+    "clinical_use": false,
+    "reference_source": "getITD v1.5.17 bundled FLT3 amplicon reference",
+    "reference_path": "vendor/getitd/anno/amplicon.txt",
+    "reference_sha256": "87c42cc40d2545a77f4a530bd620f9885ec0adb099041ebe6e324b08502421da",
+    "coordinate_system": "getITD one-based amplicon start",
+    "itd_position": 72,
+    "itd_sequence": "TTGATTTCAGAGAATATGAAT",
+    "itd_length_bp": 21,
+    "read_length_bp": 251,
+    "paired_end": true,
+    "random_seed": 20260912,
+    "fragment_count": 200,
+    "intended_variant_fragment_fraction": 0.6,
+    "observed_variant_fragment_fraction": 0.6,
+    "deterministic_noise": {
+      "type": "single_base_substitution",
+      "mutant_template_positions_zero_based": [
+        140,
+        145,
+        150,
+        155
+      ],
+      "purpose": "Model unique sequencing reads outside the ITD and primer regions"
+    },
+    "r1_sha256": "dee0900c3ab2a2633dad3371ad53c20f55c4b45429d2a91eae1ea52666fee230",
+    "r2_sha256": "4c724ba9b0cb278e5f6812f3c4b5487d1fe1a0c3a967fbab9f53d033cb21b1cc",
+    "generator": "pipeline/generate_reads.py",
+    "limitations": [
+      "Synthetic computational challenge only",
+      "No biological or clinical conclusion",
+      "Intended fragment fraction is not a validated clinical VAF"
+    ]
+  },
+  "runs": [
+    {
+      "profile": "compatible",
+      "command": [
+        "vendor/getitd/getitd.py",
+        "-reference",
+        "vendor/getitd/anno/amplicon.txt",
+        "-anno",
+        "vendor/getitd/anno/amplicon_kayser.tsv",
+        "-nkern=1",
+        "pitch-compatible",
+        "data/synthetic_case/generated/FLT3-ITD-DEMO-001_R1.fastq",
+        "data/synthetic_case/generated/FLT3-ITD-DEMO-001_R2.fastq"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 8.057,
+      "exact_recovery": true,
+      "high_confidence_tsv_exists": true,
+      "reference_verdict": "COMPUTATIONALLY_OBSERVABLE",
+      "calls": [
+        {
+          "position": 72,
+          "length_bp": 21,
+          "sequence": "TTGATTTCAGAGAATATGAAT",
+          "unique_supporting_reads": 4,
+          "total_supporting_reads": 120
+        }
+      ]
+    },
+    {
+      "profile": "changed",
+      "command": [
+        "vendor/getitd/getitd.py",
+        "-reference",
+        "vendor/getitd/anno/amplicon.txt",
+        "-anno",
+        "vendor/getitd/anno/amplicon_kayser.tsv",
+        "-nkern=1",
+        "-filter_ins_unique_reads=5",
+        "pitch-changed",
+        "data/synthetic_case/generated/FLT3-ITD-DEMO-001_R1.fastq",
+        "data/synthetic_case/generated/FLT3-ITD-DEMO-001_R2.fastq"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 7.645,
+      "exact_recovery": false,
+      "high_confidence_tsv_exists": false,
+      "reference_verdict": "NOT_TECHNICALLY_COMPARABLE",
+      "calls": []
+    }
+  ],
+  "r1_sha256_verified": true,
+  "r2_sha256_verified": true
+}
