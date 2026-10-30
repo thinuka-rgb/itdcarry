@@ -9,26 +9,26 @@ You can also click a step label directly. Every step holds until you move on.
 Script / sources shows the words for the current slide or demo step.
 
 SLIDE 1 — Same DNA. Different answer?
-Hello, I’m Thinuka. My project is called ITDcarry. It asks: if we change a program’s settings, can it still find a DNA pattern we know is there? I tested this using made-up DNA data.
+Hello, I’m Thinuka. My project is called ITDcarry. It asks: can a different or updated DNA-analysis pipeline still detect the same known FLT3-ITD mutation? ITDcarry tests this using artificial DNA data containing that exact mutation.
 
 SLIDE 2 — One threshold. A different result.
-Look at the two numbers: two and five. Our data has four separate pieces of evidence for the DNA pattern. The first setting needs only two, so it finds the pattern. The second needs five, so it doesn’t report it. Same data, different setting, different answer.
+This demo uses the same software with two different settings. Look at the numbers: two and five. Our data has four separate pieces of evidence for the mutation. Requiring two finds it. Requiring five doesn’t report it. This is one example of how a change in the pipeline can change the answer.
 
 SLIDE 3 — Challenge it. Then compare exactly.
-There are three steps. First, save the DNA pattern we want to find. Second, test both settings using the same made-up data. Third, check that the result matches exactly: where the pattern starts, how long it is, and its DNA letters. The details at the bottom describe our test pattern.
+There are three steps. First, record the known FLT3-ITD mutation. Second, give the pipeline artificial DNA data containing it. Third, check that the detected mutation matches exactly: its position, its length, and its DNA letters. The details at the bottom describe the mutation used in this demo.
 
 SLIDE 4 — Same input. Two runs.
 [Entering this slide shows step 1. Advance each step when you are ready.]
 STEP 1 — One known marker
-These are results from a real test on my computer. We start with the same made-up DNA data and a known pattern.
+These are results from a real test on my computer. Both runs use the same artificial DNA data containing the known FLT3-ITD mutation.
 [Next: show the next step.]
 
 STEP 2 — Compatible profile
-The first setting finds the pattern. All three details match, with four pieces of evidence.
+The first setting detects the mutation. All three details match, with four pieces of evidence.
 [Next: show the next step.]
 
 STEP 3 — Changed profile
-The second setting needs five. The program finishes, but doesn’t report the pattern.
+The second setting needs five. The program finishes, but doesn’t report the mutation.
 [Next: show the next step.]
 
 STEP 4 — Exact-match result
@@ -36,7 +36,7 @@ So the answers aren’t directly comparable. The setting changed. The DNA data s
 [Next: go to slide 5.]
 
 SLIDE 5 — A check on software. A traceable explanation.
-This shows how one software setting can change a result. We can inspect the output and repeat the test. It tells us about the software, not a person’s health. It cannot diagnose anyone or check laboratory work. This demo ran on my computer; the cloud services listed below weren’t tested here.
+Here, changing one setting stopped the pipeline from reporting the known mutation. That shows why we should check whether a changed pipeline can still detect it. We can inspect the output and repeat the test. It tells us about the software, not a person’s health. It cannot diagnose anyone or check laboratory work. This demo ran on my computer; the cloud services listed below weren’t tested here.
 
 SLIDE 6 — Help me test the question more deeply.
 I’d like approval to show this project at school, with teacher guidance. I want classmates’ feedback, more test cases, and a clear record of its limits. My main question is: before comparing two answers, have we checked what the software can still find? Thank you.

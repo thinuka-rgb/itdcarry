@@ -36,7 +36,7 @@ key('ArrowRight');
 assert.equal(state(), '3:1');
 assert.notEqual(elements.demoFrame.src, firstFrame);
 click('notes');
-assert.match(elements.noteBody.textContent, /first setting finds the pattern/);
+assert.ok(elements.noteBody.textContent.includes(vm.runInContext('slides[3].steps[1].script', context)));
 key('ArrowRight');
 assert.equal(state(), '3:1', 'Notes must block slide keyboard shortcuts');
 click('close'); key(' '); click('next');
